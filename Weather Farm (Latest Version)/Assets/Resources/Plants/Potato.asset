@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 893028d2c48a0114ea7332ddd6cd349e, type: 3}
-  m_Name: New Tomato
+  m_Name: Potato
   m_EditorClassIdentifier: 
-  plantName: New Tomato
+  plantName: Potato
   plantStages:
   - {fileID: -3780498461408796120, guid: 586370fcba9d692418edd3cdec109c77, type: 3}
   - {fileID: -5827874292771562073, guid: 586370fcba9d692418edd3cdec109c77, type: 3}
   - {fileID: 2402415582554515247, guid: 586370fcba9d692418edd3cdec109c77, type: 3}
-  - {fileID: 8304950708062100032, guid: 586370fcba9d692418edd3cdec109c77, type: 3}
+  - {fileID: -9204101089392872150, guid: 9298f2fe65a20a349a81b48c17e70c1a, type: 3}
   timeBtwStages: 15
   buyPrice: 100
   sellPrice: 250
