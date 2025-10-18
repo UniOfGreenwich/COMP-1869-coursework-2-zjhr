@@ -18,12 +18,12 @@ public class AcreManager : MonoBehaviour
 
     FarmManager fm;
 
-    bool isDry = true;
+    public bool isDry = true;
     public Sprite drySprite;
     public Sprite normalSprite;
     public Sprite unavailableSprite;
 
-    float speed = 1f;
+    public float speed = 1f;
     public bool isBought = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
