@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class AcreManager : MonoBehaviour
 {
-    bool isPlanted = false;
+    public bool isPlanted = false;
     public SpriteRenderer plant;
     BoxCollider2D plantCollider;
 
-    int plantStage = 0;
-    float timer;
+    public int plantStage = 0;
+    public float timer;
 
     public Color availableColor = Color.green;
     public Color unavailableColor = Color.red;
 
-    SpriteRenderer plot;
+    public SpriteRenderer plot;
 
-     PlantObject selectedPlant;
+    public PlantObject selectedPlant;
 
     FarmManager fm;
 
@@ -26,7 +26,6 @@ public class AcreManager : MonoBehaviour
     public float speed = 1f;
     public bool isBought = true;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         plant = transform.GetChild(0).GetComponent<SpriteRenderer>();

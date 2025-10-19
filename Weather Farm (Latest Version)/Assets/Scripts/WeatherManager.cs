@@ -37,7 +37,7 @@ public class WeatherManager : MonoBehaviour
 
     // internal
     DateTime currentUKDate;
-    WeatherType currentWeather;
+    public WeatherType currentWeather;
     Coroutine tickCoroutine;
 
     const string PREF_PREFIX = "Weather_";
@@ -50,7 +50,7 @@ public class WeatherManager : MonoBehaviour
         // get today's UK date on startup
         currentUKDate = GetNowInUK().Date;
 
-        // Ensure weather exists for today (and possibly future days assigned by run)
+        // Ensure weather exists for today 
         EnsureWeatherForDate(currentUKDate);
 
         // Apply today's weather immediately

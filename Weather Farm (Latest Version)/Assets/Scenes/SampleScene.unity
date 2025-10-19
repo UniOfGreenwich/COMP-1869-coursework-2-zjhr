@@ -343,6 +343,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136341294}
   m_CullTransparentMesh: 1
+--- !u!1 &142320131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 142320133}
+  - component: {fileID: 142320132}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &142320132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142320131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f49040275cffb43b3ab78ecea45173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveKey: 286
+  loadKey: 290
+--- !u!4 &142320133
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142320131}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.6557295, y: -0.47923788, z: 0.027552458}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &143940812 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9088322666482216726, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
@@ -358,7 +404,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_9
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -932,7 +978,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_14
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -1028,6 +1074,7 @@ MonoBehaviour:
   sunLightSunnyIntensity: 1.2
   rainParticles: {fileID: 1123437798}
   debugLogs: 1
+  currentWeather: 0
 --- !u!4 &391270369
 Transform:
   m_ObjectHideFlags: 0
@@ -1055,7 +1102,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_18
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -1439,7 +1486,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_10
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -1588,7 +1635,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_2
       objectReference: {fileID: 0}
     - target: {fileID: 9088322666482216726, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1726,7 +1773,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_8
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -1880,7 +1927,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_19
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -1950,7 +1997,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_3
       objectReference: {fileID: 0}
     - target: {fileID: 9088322666482216726, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6915,7 +6962,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_5
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -6980,7 +7027,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_7
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -7429,7 +7476,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_17
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -7494,7 +7541,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_13
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -7559,7 +7606,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_6
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -7709,7 +7756,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_1
       objectReference: {fileID: 0}
     - target: {fileID: 9088322666482216726, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7766,7 +7813,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_20
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -8211,7 +8258,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_16
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -8355,7 +8402,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_11
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -8488,7 +8535,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_4
       objectReference: {fileID: 0}
     - target: {fileID: 9088322666482216726, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8545,7 +8592,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_12
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -8706,7 +8753,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 684836041555209488, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_Name
-      value: Acre
+      value: Acre_15
       objectReference: {fileID: 0}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
@@ -8770,3 +8817,4 @@ SceneRoots:
   - {fileID: 553622401}
   - {fileID: 263147791}
   - {fileID: 391270369}
+  - {fileID: 142320133}
