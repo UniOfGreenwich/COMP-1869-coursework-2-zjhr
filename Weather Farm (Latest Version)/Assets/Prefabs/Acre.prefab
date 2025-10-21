@@ -60,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,11 +104,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d01953700e8f684c9d22240b7a71e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlanted: 0
   plant: {fileID: 5778988273741498073}
+  plantStage: 0
+  timer: 0
   availableColor: {r: 0, g: 1, b: 0, a: 1}
   unavailableColor: {r: 1, g: 0, b: 0, a: 1}
+  plot: {fileID: 0}
+  selectedPlant: {fileID: 0}
+  isDry: 1
   drySprite: {fileID: -1167222277155119612, guid: 586370fcba9d692418edd3cdec109c77, type: 3}
   normalSprite: {fileID: -939494641437605497, guid: be04c3e6fece0e441a9480b6a4e1d4b4, type: 3}
+  unavailableSprite: {fileID: 0}
+  speed: 1
+  isBought: 1
 --- !u!114 &-1721646266729285177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +266,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
