@@ -210,7 +210,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rainy_0
+      name: Rainy
       rect:
         serializedVersion: 2
         x: 844
@@ -245,7 +245,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rainy_0: -5596142080214384421
+      Rainy: -5596142080214384421
       Rainy_1: -2282767274282543594
       Rainy_10: -2498623019853093281
       Rainy_11: -606255854477719337

@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: 85cc8a99a391e41aaa6917032cc0925d
+guid: ac4eb906f081b9f41aaed83c5f1e4d84
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8805854803662519603
-    second: windy_cloud_0
+      213: 8436888122996679698
+    second: Snowy_0
   - first:
-      213: 8274606889196883440
-    second: windy_cloud_1
+      213: -24324586730978834
+    second: Snowy_1
+  - first:
+      213: 2526701790760855857
+    second: Snowy_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Windy
+      name: Snowy
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 400
-        height: 400
+        x: 20
+        y: 14
+        width: 475
+        height: 482
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,8 +121,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 33db8fbd94ea43a70800000000000000
-      internalID: 8805854803662519603
+      spriteID: 214edec1c09d51570800000000000000
+      internalID: 8436888122996679698
       vertices: []
       indices: 
       edges: []
@@ -128,7 +131,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e3969ad9d9288354ea1e6784fa6d0764
+    spriteID: aa9ebc25fa30b294e8a21e57b9ec2316
     internalID: 0
     vertices: []
     indices: 
@@ -138,8 +141,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Windy: 8805854803662519603
-      windy_cloud_1: 8274606889196883440
+      Snowy: 8436888122996679698
+      Snowy_1: -24324586730978834
+      Snowy_2: 2526701790760855857
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

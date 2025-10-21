@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class WeatherManager : MonoBehaviour
 {
-    public enum WeatherType { Sunny, Rainy, Windy }
+    public enum WeatherType { Sunny, Rainy, Windy, Snowy }
 
     [Header("Runtime / Time")]
     [Tooltip("If true the manager uses real UK time. If false you can simulate weather changes by changing secondsPerDayForTesting.")]
@@ -25,6 +25,7 @@ public class WeatherManager : MonoBehaviour
     public Sprite sunnySprite;
     public Sprite rainySprite;
     public Sprite windySprite;
+    public Sprite snowySprite;
     public Text dayLabel;
 
     [Header("Visuals")]
@@ -32,8 +33,14 @@ public class WeatherManager : MonoBehaviour
     public float sunLightNormalIntensity = 0.6f;
     public float sunLightSunnyIntensity = 1.2f;
     public float sunLightWindyIntensity = 0.9f;
+    public float sunLightSnowyIntensity = 0.8f;
     public ParticleSystem rainParticles;
     public ParticleSystem windyParticles;
+    public ParticleSystem snowParticles;
+
+    [Header("Snow Settings")]
+    [Tooltip("How long (in seconds) crops stay frozen during snowy weather.")]
+    public float freezeDuration = 10f;
 
     [Header("Behaviour / Debug")]
     public bool debugLogs = true;
@@ -45,6 +52,7 @@ public class WeatherManager : MonoBehaviour
 
     const string PREF_PREFIX = "Weather_";
     System.Random rng;
+    bool isFreezingCrops = false;
 
     void Start()
     {
@@ -74,24 +82,16 @@ public class WeatherManager : MonoBehaviour
         {
             TimeZoneInfo ukZone = null;
             try { ukZone = TimeZoneInfo.FindSystemTimeZoneById("Europe/London"); }
-            catch { }
-            if (ukZone == null)
-            {
-                try { ukZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time"); }
-                catch { }
-            }
+            catch { ukZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time"); }
             if (ukZone != null)
-            {
-                DateTime ukNow = TimeZoneInfo.ConvertTimeFromUtc(utcNow, ukZone);
-                return ukNow;
-            }
+                return TimeZoneInfo.ConvertTimeFromUtc(utcNow, ukZone);
         }
         catch (Exception e)
         {
             if (debugLogs) Debug.LogWarning("[WeatherManager] TimeZone conversion failed: " + e.Message);
         }
 
-        if (debugLogs) Debug.LogWarning("[WeatherManager] Falling back to local time for date. Ensure device timezone is UK for accurate behaviour.");
+        if (debugLogs) Debug.LogWarning("[WeatherManager] Falling back to local time.");
         return DateTime.Now;
     }
 
@@ -126,7 +126,7 @@ public class WeatherManager : MonoBehaviour
         WeatherType newWeather;
         do
         {
-            newWeather = (WeatherType)rng.Next(0, 3);
+            newWeather = (WeatherType)rng.Next(0, 4); // include Snowy
         } while (newWeather == prevWeather);
 
         int run = rng.Next(1, maxRunLength + 1);
@@ -164,8 +164,6 @@ public class WeatherManager : MonoBehaviour
     void ApplyWeatherForDate(DateTime date)
     {
         currentUKDate = date.Date;
-
-        // Current weather can be changed manually
         if (useRealUKTime)
         {
             currentWeather = WeatherForDate(date);
@@ -183,27 +181,41 @@ public class WeatherManager : MonoBehaviour
                 case WeatherType.Sunny: weatherIcon.sprite = sunnySprite; break;
                 case WeatherType.Rainy: weatherIcon.sprite = rainySprite; break;
                 case WeatherType.Windy: weatherIcon.sprite = windySprite; break;
+                case WeatherType.Snowy: weatherIcon.sprite = snowySprite; break;
             }
             weatherIcon.enabled = true;
         }
 
-        if (sunLight != null)
-        {
-            if (currentWeather == WeatherType.Sunny) sunLight.intensity = sunLightSunnyIntensity;
-            else if (currentWeather == WeatherType.Rainy) sunLight.intensity = sunLightNormalIntensity;
-            else if (currentWeather == WeatherType.Windy) sunLight.intensity = sunLightWindyIntensity;
-        }
-
+        // Stop all particle effects first
         if (rainParticles != null && rainParticles.isPlaying)
             rainParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-
         if (windyParticles != null && windyParticles.isPlaying)
             windyParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        if (snowParticles != null && snowParticles.isPlaying)
+            snowParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
-        if (currentWeather == WeatherType.Rainy && rainParticles != null)
-            rainParticles.Play();
-        else if (currentWeather == WeatherType.Windy && windyParticles != null)
-            windyParticles.Play();
+        // Set sunlight intensity & play particles
+        if (sunLight != null)
+        {
+            switch (currentWeather)
+            {
+                case WeatherType.Sunny:
+                    sunLight.intensity = sunLightSunnyIntensity;
+                    break;
+                case WeatherType.Rainy:
+                    sunLight.intensity = sunLightNormalIntensity;
+                    if (rainParticles != null) rainParticles.Play();
+                    break;
+                case WeatherType.Windy:
+                    sunLight.intensity = sunLightWindyIntensity;
+                    if (windyParticles != null) windyParticles.Play();
+                    break;
+                case WeatherType.Snowy:
+                    sunLight.intensity = sunLightSnowyIntensity;
+                    if (snowParticles != null) snowParticles.Play();
+                    break;
+            }
+        }
 
         ApplyEffectsToPlots(currentWeather);
 
@@ -213,39 +225,59 @@ public class WeatherManager : MonoBehaviour
     void ApplyEffectsToPlots(WeatherType weather)
     {
         float baseSpeed = 1f;
-
         AcreManager[] plots = FindObjectsOfType<AcreManager>();
+
         foreach (var p in plots)
         {
             if (p == null) continue;
 
-            if (weather == WeatherType.Rainy)
+            switch (weather)
             {
-                p.isDry = false;
-                p.speed = baseSpeed * 1.5f;
-            }
-            else if (weather == WeatherType.Sunny)
-            {
-                bool currentlyWatered = !p.isDry;
-                if (currentlyWatered)
-                {
-                    p.speed = baseSpeed * 1.2f;
+                case WeatherType.Rainy:
                     p.isDry = false;
-                }
-                else
-                {
+                    p.speed = baseSpeed * 1.5f;
+                    break;
+
+                case WeatherType.Sunny:
+                    if (!p.isDry)
+                        p.speed = baseSpeed * 1.2f;
+                    else
+                        p.speed = baseSpeed * 0.6f;
+                    break;
+
+                case WeatherType.Windy:
+                    p.isDry = UnityEngine.Random.value < 0.3f;
+                    p.speed = baseSpeed * 0.8f;
+                    break;
+
+                case WeatherType.Snowy:
                     p.isDry = true;
-                    p.speed = baseSpeed * 0.6f;
-                }
-            }
-            else if (weather == WeatherType.Windy)
-            {
-                p.isDry = UnityEngine.Random.value < 0.3f;
-                p.speed = baseSpeed * 0.8f;
+                    p.speed = 0f; // frozen completely
+                    if (!isFreezingCrops)
+                        StartCoroutine(FreezeCropsTemporarily(plots));
+                    break;
             }
         }
 
         if (debugLogs) Debug.Log($"[WeatherManager] Effects applied to {plots.Length} plots for {weather}");
+    }
+
+    IEnumerator FreezeCropsTemporarily(AcreManager[] plots)
+    {
+        isFreezingCrops = true;
+
+        if (debugLogs) Debug.Log($"[WeatherManager] Crops frozen for {freezeDuration} seconds!");
+
+        yield return new WaitForSeconds(freezeDuration);
+
+        foreach (var p in plots)
+        {
+            if (p == null) continue;
+            p.speed = 1f; // restore growth
+        }
+
+        isFreezingCrops = false;
+        if (debugLogs) Debug.Log("[WeatherManager] Crops unfrozen.");
     }
     #endregion
 
@@ -271,13 +303,13 @@ public class WeatherManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(secondsPerWeather);
-            currentWeather = (WeatherType)rng.Next(0, 3);
+            currentWeather = (WeatherType)rng.Next(0, 4);
             ApplyWeatherForDate(currentUKDate);
         }
     }
     #endregion
 
-    #region Utilities (manual controls)
+    #region Utilities
     public void ForceAdvanceForTesting()
     {
         DateTime next = currentUKDate.AddDays(1);
@@ -301,14 +333,11 @@ public class WeatherManager : MonoBehaviour
     {
         DateTime start = GetNowInUK().Date.AddDays(-60);
         for (int i = 0; i < 120; i++)
-        {
             yield return KeyForDate(start.AddDays(i));
-        }
     }
     #endregion
 
 #if UNITY_EDITOR
-    // Allows to chnage weather in inspector
     void OnValidate()
     {
         if (!Application.isPlaying) return;
