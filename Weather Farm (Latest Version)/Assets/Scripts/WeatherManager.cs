@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class WeatherManager : MonoBehaviour
 {
-    public enum WeatherType { Sunny, Rainy }
+    public enum WeatherType { Sunny, Rainy, Windy }
 
     [Header("Runtime / Time")]
-    [Tooltip("If true the manager uses real UK time. If false you can simulate days by changing secondsPerDay.")]
+    [Tooltip("If true the manager uses real UK time. If false you can simulate weather changes by changing secondsPerDayForTesting.")]
     public bool useRealUKTime = true;
 
-    [Tooltip("Only used when useRealUKTime = false (for debugging). Seconds representing one in-game day.")]
+    [Tooltip("Only used when useRealUKTime = false (for debugging). Seconds representing one weather change interval.")]
     public float secondsPerDayForTesting = 5f;
 
     [Header("Week / Run settings")]
@@ -24,18 +24,21 @@ public class WeatherManager : MonoBehaviour
     public Image weatherIcon;
     public Sprite sunnySprite;
     public Sprite rainySprite;
+    public Sprite windySprite;
     public Text dayLabel;
 
     [Header("Visuals")]
     public Light sunLight;
     public float sunLightNormalIntensity = 0.6f;
     public float sunLightSunnyIntensity = 1.2f;
+    public float sunLightWindyIntensity = 0.9f;
     public ParticleSystem rainParticles;
+    public ParticleSystem windyParticles;
 
     [Header("Behaviour / Debug")]
     public bool debugLogs = true;
 
-    // internal
+    // Internal
     DateTime currentUKDate;
     public WeatherType currentWeather;
     Coroutine tickCoroutine;
@@ -46,17 +49,11 @@ public class WeatherManager : MonoBehaviour
     void Start()
     {
         rng = new System.Random();
-
-        // get today's UK date on startup
         currentUKDate = GetNowInUK().Date;
 
-        // Ensure weather exists for today 
         EnsureWeatherForDate(currentUKDate);
-
-        // Apply today's weather immediately
         ApplyWeatherForDate(currentUKDate);
 
-        // start the update process — either real midnight-based or test seconds-per-day
         if (useRealUKTime)
         {
             if (debugLogs) Debug.Log("[WeatherManager] Using real UK time. Scheduling midnight update.");
@@ -64,17 +61,15 @@ public class WeatherManager : MonoBehaviour
         }
         else
         {
-            if (debugLogs) Debug.Log("[WeatherManager] Using test time. Seconds per day = " + secondsPerDayForTesting);
-            tickCoroutine = StartCoroutine(TestDayTicker(secondsPerDayForTesting));
+            if (debugLogs) Debug.Log("[WeatherManager] Using test time. Seconds per weather = " + secondsPerDayForTesting);
+            tickCoroutine = StartCoroutine(TestWeatherTicker(secondsPerDayForTesting));
         }
     }
 
     #region Time helpers (UK)
-    // Cross-platform attempt to get UK (Europe/London) time; falls back to local/UTC if not found.
     DateTime GetNowInUK()
     {
         DateTime utcNow = DateTime.UtcNow;
-
         try
         {
             TimeZoneInfo ukZone = null;
@@ -100,7 +95,6 @@ public class WeatherManager : MonoBehaviour
         return DateTime.Now;
     }
 
-    // seconds until next UK midnight
     double SecondsUntilNextUKMidnight()
     {
         DateTime nowUK = GetNowInUK();
@@ -120,7 +114,21 @@ public class WeatherManager : MonoBehaviour
         string key = KeyForDate(date);
         if (PlayerPrefs.HasKey(key)) return;
 
-        WeatherType pick = (rng.Next(0, 2) == 0) ? WeatherType.Sunny : WeatherType.Rainy;
+        DateTime prevDate = date.AddDays(-1);
+        string prevKey = KeyForDate(prevDate);
+
+        WeatherType prevWeather = WeatherType.Sunny;
+        if (PlayerPrefs.HasKey(prevKey))
+        {
+            Enum.TryParse(PlayerPrefs.GetString(prevKey), out prevWeather);
+        }
+
+        WeatherType newWeather;
+        do
+        {
+            newWeather = (WeatherType)rng.Next(0, 3);
+        } while (newWeather == prevWeather);
+
         int run = rng.Next(1, maxRunLength + 1);
 
         for (int i = 0; i < run; i++)
@@ -129,8 +137,8 @@ public class WeatherManager : MonoBehaviour
             string k = KeyForDate(d);
             if (!PlayerPrefs.HasKey(k))
             {
-                PlayerPrefs.SetString(k, pick.ToString());
-                if (debugLogs) Debug.Log($"[WeatherManager] Assigned {pick} to {d:yyyy-MM-dd}");
+                PlayerPrefs.SetString(k, newWeather.ToString());
+                if (debugLogs) Debug.Log($"[WeatherManager] Assigned {newWeather} to {d:yyyy-MM-dd}");
             }
         }
 
@@ -156,29 +164,46 @@ public class WeatherManager : MonoBehaviour
     void ApplyWeatherForDate(DateTime date)
     {
         currentUKDate = date.Date;
-        currentWeather = WeatherForDate(date);
+
+        // Current weather can be changed manually
+        if (useRealUKTime)
+        {
+            currentWeather = WeatherForDate(date);
+        }
 
         if (dayLabel != null)
         {
             dayLabel.text = currentUKDate.ToString("ddd") + " - " + currentWeather.ToString();
         }
+
         if (weatherIcon != null)
         {
-            weatherIcon.sprite = (currentWeather == WeatherType.Sunny) ? sunnySprite : rainySprite;
+            switch (currentWeather)
+            {
+                case WeatherType.Sunny: weatherIcon.sprite = sunnySprite; break;
+                case WeatherType.Rainy: weatherIcon.sprite = rainySprite; break;
+                case WeatherType.Windy: weatherIcon.sprite = windySprite; break;
+            }
             weatherIcon.enabled = true;
         }
 
-        // Visuals: light + rain
-        if (currentWeather == WeatherType.Sunny)
+        if (sunLight != null)
         {
-            if (sunLight != null) sunLight.intensity = sunLightSunnyIntensity;
-            if (rainParticles != null && rainParticles.isPlaying) rainParticles.Stop();
+            if (currentWeather == WeatherType.Sunny) sunLight.intensity = sunLightSunnyIntensity;
+            else if (currentWeather == WeatherType.Rainy) sunLight.intensity = sunLightNormalIntensity;
+            else if (currentWeather == WeatherType.Windy) sunLight.intensity = sunLightWindyIntensity;
         }
-        else // Rainy
-        {
-            if (sunLight != null) sunLight.intensity = sunLightNormalIntensity;
-            if (rainParticles != null && !rainParticles.isPlaying) rainParticles.Play();
-        }
+
+        if (rainParticles != null && rainParticles.isPlaying)
+            rainParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        if (windyParticles != null && windyParticles.isPlaying)
+            windyParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        if (currentWeather == WeatherType.Rainy && rainParticles != null)
+            rainParticles.Play();
+        else if (currentWeather == WeatherType.Windy && windyParticles != null)
+            windyParticles.Play();
 
         ApplyEffectsToPlots(currentWeather);
 
@@ -187,7 +212,6 @@ public class WeatherManager : MonoBehaviour
 
     void ApplyEffectsToPlots(WeatherType weather)
     {
-
         float baseSpeed = 1f;
 
         AcreManager[] plots = FindObjectsOfType<AcreManager>();
@@ -200,7 +224,7 @@ public class WeatherManager : MonoBehaviour
                 p.isDry = false;
                 p.speed = baseSpeed * 1.5f;
             }
-            else
+            else if (weather == WeatherType.Sunny)
             {
                 bool currentlyWatered = !p.isDry;
                 if (currentlyWatered)
@@ -213,6 +237,11 @@ public class WeatherManager : MonoBehaviour
                     p.isDry = true;
                     p.speed = baseSpeed * 0.6f;
                 }
+            }
+            else if (weather == WeatherType.Windy)
+            {
+                p.isDry = UnityEngine.Random.value < 0.3f;
+                p.speed = baseSpeed * 0.8f;
             }
         }
 
@@ -237,17 +266,15 @@ public class WeatherManager : MonoBehaviour
         }
     }
 
-    IEnumerator TestDayTicker(float secondsPerDay)
+    IEnumerator TestWeatherTicker(float secondsPerWeather)
     {
         while (true)
         {
-            yield return new WaitForSeconds(secondsPerDay);
-            DateTime next = currentUKDate.AddDays(1);
-            EnsureWeatherForDate(next);
-            ApplyWeatherForDate(next);
+            yield return new WaitForSeconds(secondsPerWeather);
+            currentWeather = (WeatherType)rng.Next(0, 3);
+            ApplyWeatherForDate(currentUKDate);
         }
     }
-
     #endregion
 
     #region Utilities (manual controls)
@@ -279,4 +306,13 @@ public class WeatherManager : MonoBehaviour
         }
     }
     #endregion
+
+#if UNITY_EDITOR
+    // Allows to chnage weather in inspector
+    void OnValidate()
+    {
+        if (!Application.isPlaying) return;
+        ApplyWeatherForDate(currentUKDate);
+    }
+#endif
 }
