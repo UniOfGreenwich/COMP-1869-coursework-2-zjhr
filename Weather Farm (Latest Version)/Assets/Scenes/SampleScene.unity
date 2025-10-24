@@ -406,6 +406,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_9
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -888,6 +892,90 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &322774059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 322774060}
+  - component: {fileID: 322774061}
+  m_Layer: 0
+  m_Name: Sunlight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &322774060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322774059}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.2918311, y: -0.19405715, z: 0.0488236}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 391270369}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &322774061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322774059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 2
+  m_LightType: 4
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 0.9716981, g: 0.87555087, b: 0.16958882, a: 1}
+  m_Intensity: 1.5
+  m_LightVolumeIntensity: 1
+  m_LightVolumeEnabled: 0
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 1
+  m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0.3
+  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &336900232
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,6 +1068,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_14
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -1071,11 +1163,15 @@ MonoBehaviour:
   windySprite: {fileID: 8805854803662519603, guid: 85cc8a99a391e41aaa6917032cc0925d, type: 3}
   snowySprite: {fileID: 8436888122996679698, guid: ac4eb906f081b9f41aaed83c5f1e4d84, type: 3}
   dayLabel: {fileID: 1869105749}
-  sunLight: {fileID: 587518494}
-  sunLightNormalIntensity: 0.6
-  sunLightSunnyIntensity: 1.2
-  sunLightWindyIntensity: 0.9
-  sunLightSnowyIntensity: 0.8
+  sunLight2D: {fileID: 322774061}
+  sunny2DLightIntensity: 1.2
+  rainy2DLightIntensity: 0.6
+  windy2DLightIntensity: 0.9
+  snowy2DLightIntensity: 0.8
+  sunny2DLightColor: {r: 1, g: 1, b: 1, a: 1}
+  rainy2DLightColor: {r: 0.7, g: 0.7, b: 1, a: 1}
+  windy2DLightColor: {r: 0.9, g: 0.9, b: 1, a: 1}
+  snowy2DLightColor: {r: 0.8, g: 0.9, b: 1, a: 1}
   rainParticles: {fileID: 1123437798}
   windyParticles: {fileID: 911925197}
   snowParticles: {fileID: 1047683218}
@@ -1095,7 +1191,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 587518495}
+  - {fileID: 322774060}
   - {fileID: 1123437800}
   - {fileID: 911925195}
   - {fileID: 1047683220}
@@ -1113,6 +1209,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_18
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -1388,127 +1488,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9088322666482216726, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
   m_PrefabInstance: {fileID: 1166135011}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &587518493
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 587518495}
-  - component: {fileID: 587518494}
-  - component: {fileID: 587518496}
-  m_Layer: 0
-  m_Name: Sun Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &587518494
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 587518493}
-  m_Enabled: 1
-  serializedVersion: 11
-  m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.2
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 0
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ForceVisible: 0
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
-  m_LightUnit: 1
-  m_LuxAtDistance: 1
-  m_EnableSpotReflector: 1
---- !u!4 &587518495
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 587518493}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.09, y: 3.53, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 391270369}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &587518496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 587518493}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
 --- !u!1001 &759751105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1521,6 +1500,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_10
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -1670,6 +1653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_2
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 9088322666482216726, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.65
@@ -1772,7 +1759,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  - {fileID: 2100000, guid: 80d217bab5b782a40b18385b4f10d1b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6641,6 +6628,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_8
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -6795,6 +6786,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_19
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -6865,6 +6860,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_3
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 9088322666482216726, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.3
@@ -11675,7 +11674,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  - {fileID: 2100000, guid: 80d217bab5b782a40b18385b4f10d1b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16508,7 +16507,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  - {fileID: 2100000, guid: 80d217bab5b782a40b18385b4f10d1b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16663,6 +16662,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_5
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -16728,6 +16731,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_7
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -17177,6 +17184,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_17
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -17242,6 +17253,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_13
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -17307,6 +17322,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_6
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -17457,6 +17476,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_1
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 9088322666482216726, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -17514,6 +17537,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_20
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -17959,6 +17986,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_16
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -18103,6 +18134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_11
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -18236,6 +18271,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_4
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 9088322666482216726, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.95
@@ -18293,6 +18332,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_12
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0
@@ -18454,6 +18497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Acre_15
       objectReference: {fileID: 0}
+    - target: {fileID: 3097099584426656523, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5528144997758814473, guid: ef5a1fa00af1c164a8056987222287ac, type: 3}
       propertyPath: isBought
       value: 0

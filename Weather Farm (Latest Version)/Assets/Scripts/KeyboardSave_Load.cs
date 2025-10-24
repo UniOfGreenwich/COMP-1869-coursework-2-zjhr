@@ -58,7 +58,6 @@ public class KeyboardSaveLoad : MonoBehaviour
             farmManager.moneyTxt.text = "$" + farmManager.money;
         }
 
-        //Loads each acre
         foreach (var acre in acres)
         {
             string plotID = acre.gameObject.name;
@@ -82,7 +81,6 @@ public class KeyboardSaveLoad : MonoBehaviour
                 }
             }
 
-            // Updates the plant visuals
             if (acre.plant != null)
             {
                 acre.plant.gameObject.SetActive(acre.isPlanted);
@@ -96,22 +94,54 @@ public class KeyboardSaveLoad : MonoBehaviour
                 acre.plot.sprite = acre.isBought ? acre.normalSprite : acre.unavailableSprite;
         }
 
-        // Load the weather when the save was made
         if (weatherManager != null)
         {
             string savedWeather = PlayerPrefs.GetString("CurrentWeather", "Sunny");
             if (System.Enum.TryParse(savedWeather, out WeatherManager.WeatherType wt))
             {
                 weatherManager.currentWeather = wt;
-                if (weatherManager.weatherIcon != null)
-                    weatherManager.weatherIcon.sprite = wt == WeatherManager.WeatherType.Sunny
-                        ? weatherManager.sunnySprite
-                        : weatherManager.rainySprite;
 
-                if (weatherManager.sunLight != null)
-                    weatherManager.sunLight.intensity = wt == WeatherManager.WeatherType.Sunny
-                        ? weatherManager.sunLightSunnyIntensity
-                        : weatherManager.sunLightNormalIntensity;
+                if (weatherManager.weatherIcon != null)
+                {
+                    switch (wt)
+                    {
+                        case WeatherManager.WeatherType.Sunny:
+                            weatherManager.weatherIcon.sprite = weatherManager.sunnySprite;
+                            break;
+                        case WeatherManager.WeatherType.Rainy:
+                            weatherManager.weatherIcon.sprite = weatherManager.rainySprite;
+                            break;
+                        case WeatherManager.WeatherType.Windy:
+                            weatherManager.weatherIcon.sprite = weatherManager.windySprite;
+                            break;
+                        case WeatherManager.WeatherType.Snowy:
+                            weatherManager.weatherIcon.sprite = weatherManager.snowySprite;
+                            break;
+                    }
+                }
+
+                if (weatherManager.sunLight2D != null)
+                {
+                    switch (wt)
+                    {
+                        case WeatherManager.WeatherType.Sunny:
+                            weatherManager.sunLight2D.intensity = weatherManager.sunny2DLightIntensity;
+                            weatherManager.sunLight2D.color = weatherManager.sunny2DLightColor;
+                            break;
+                        case WeatherManager.WeatherType.Rainy:
+                            weatherManager.sunLight2D.intensity = weatherManager.rainy2DLightIntensity;
+                            weatherManager.sunLight2D.color = weatherManager.rainy2DLightColor;
+                            break;
+                        case WeatherManager.WeatherType.Windy:
+                            weatherManager.sunLight2D.intensity = weatherManager.windy2DLightIntensity;
+                            weatherManager.sunLight2D.color = weatherManager.windy2DLightColor;
+                            break;
+                        case WeatherManager.WeatherType.Snowy:
+                            weatherManager.sunLight2D.intensity = weatherManager.snowy2DLightIntensity;
+                            weatherManager.sunLight2D.color = weatherManager.snowy2DLightColor;
+                            break;
+                    }
+                }
 
                 if (weatherManager.rainParticles != null)
                 {

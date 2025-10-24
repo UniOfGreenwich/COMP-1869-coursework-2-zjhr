@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 
 public class WeatherManager : MonoBehaviour
 {
@@ -28,12 +29,18 @@ public class WeatherManager : MonoBehaviour
     public Sprite snowySprite;
     public Text dayLabel;
 
+    [Header("2D URP Lighting")]
+    public Light2D sunLight2D;
+    public float sunny2DLightIntensity = 1.2f;
+    public float rainy2DLightIntensity = 0.6f;
+    public float windy2DLightIntensity = 0.9f;
+    public float snowy2DLightIntensity = 0.8f;
+    public Color sunny2DLightColor = Color.white;
+    public Color rainy2DLightColor = new Color(0.7f, 0.7f, 1f);
+    public Color windy2DLightColor = new Color(0.9f, 0.9f, 1f);
+    public Color snowy2DLightColor = new Color(0.8f, 0.9f, 1f);
+
     [Header("Visuals")]
-    public Light sunLight;
-    public float sunLightNormalIntensity = 0.6f;
-    public float sunLightSunnyIntensity = 1.2f;
-    public float sunLightWindyIntensity = 0.9f;
-    public float sunLightSnowyIntensity = 0.8f;
     public ParticleSystem rainParticles;
     public ParticleSystem windyParticles;
     public ParticleSystem snowParticles;
@@ -45,7 +52,6 @@ public class WeatherManager : MonoBehaviour
     [Header("Behaviour / Debug")]
     public bool debugLogs = true;
 
-    // Internal
     DateTime currentUKDate;
     public WeatherType currentWeather;
     Coroutine tickCoroutine;
@@ -126,7 +132,7 @@ public class WeatherManager : MonoBehaviour
         WeatherType newWeather;
         do
         {
-            newWeather = (WeatherType)rng.Next(0, 4); // include Snowy
+            newWeather = (WeatherType)rng.Next(0, 4);
         } while (newWeather == prevWeather);
 
         int run = rng.Next(1, maxRunLength + 1);
@@ -186,7 +192,6 @@ public class WeatherManager : MonoBehaviour
             weatherIcon.enabled = true;
         }
 
-        // Stop all particle effects first
         if (rainParticles != null && rainParticles.isPlaying)
             rainParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         if (windyParticles != null && windyParticles.isPlaying)
@@ -194,24 +199,27 @@ public class WeatherManager : MonoBehaviour
         if (snowParticles != null && snowParticles.isPlaying)
             snowParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
 
-        // Set sunlight intensity & play particles
-        if (sunLight != null)
+        if (sunLight2D != null)
         {
             switch (currentWeather)
             {
                 case WeatherType.Sunny:
-                    sunLight.intensity = sunLightSunnyIntensity;
+                    sunLight2D.intensity = sunny2DLightIntensity;
+                    sunLight2D.color = sunny2DLightColor;
                     break;
                 case WeatherType.Rainy:
-                    sunLight.intensity = sunLightNormalIntensity;
+                    sunLight2D.intensity = rainy2DLightIntensity;
+                    sunLight2D.color = rainy2DLightColor;
                     if (rainParticles != null) rainParticles.Play();
                     break;
                 case WeatherType.Windy:
-                    sunLight.intensity = sunLightWindyIntensity;
+                    sunLight2D.intensity = windy2DLightIntensity;
+                    sunLight2D.color = windy2DLightColor;
                     if (windyParticles != null) windyParticles.Play();
                     break;
                 case WeatherType.Snowy:
-                    sunLight.intensity = sunLightSnowyIntensity;
+                    sunLight2D.intensity = snowy2DLightIntensity;
+                    sunLight2D.color = snowy2DLightColor;
                     if (snowParticles != null) snowParticles.Play();
                     break;
             }
@@ -252,7 +260,7 @@ public class WeatherManager : MonoBehaviour
 
                 case WeatherType.Snowy:
                     p.isDry = true;
-                    p.speed = 0f; // frozen completely
+                    p.speed = 0f;
                     if (!isFreezingCrops)
                         StartCoroutine(FreezeCropsTemporarily(plots));
                     break;
@@ -273,7 +281,7 @@ public class WeatherManager : MonoBehaviour
         foreach (var p in plots)
         {
             if (p == null) continue;
-            p.speed = 1f; // restore growth
+            p.speed = 1f;
         }
 
         isFreezingCrops = false;
